@@ -21,7 +21,7 @@ export default class NewAccount extends Component {
       source= {require('../images/logo.png')}/>
       </View>
       <View style={styles.formContainer}>
-      <AccountForm/>
+      <AccountForm navigation= {this.props.navigation}/>
       </View>
       </KeyboardAvoidingView>
     );

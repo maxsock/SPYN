@@ -63,7 +63,7 @@ export default class AccountForm extends Component {
 
 
         <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={()=> this.props.navigation.navigate('CreateScreen')}>
         <Text style={styles.buttonText}> Already a member ? </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>

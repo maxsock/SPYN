@@ -11,17 +11,21 @@ import * as firebase from 'firebase';
 //<NewAccount />
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDsayAiukW8so98Sxz1nwFbP3o5K-vBX3s",
-    authDomain: "spyn-cdccc.firebaseapp.com",
-    databaseURL: "https://spyn-cdccc.firebaseio.com",
-    projectId: "spyn-cdccc",
-    storageBucket: "spyn-cdccc.appspot.com",
-    messagingSenderId: "734474992277"
-};
-const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 export default class App extends Component {
+  componentWillMount(){
+    const firebaseConfig = {
+      apiKey: "AIzaSyDsayAiukW8so98Sxz1nwFbP3o5K-vBX3s",
+        authDomain: "spyn-cdccc.firebaseapp.com",
+        databaseURL: "https://spyn-cdccc.firebaseio.com",
+        projectId: "spyn-cdccc",
+        storageBucket: "spyn-cdccc.appspot.com",
+        messagingSenderId: "734474992277"
+    };
+    const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+  }
+
   constructor(){
     super();
     this.state ={
@@ -52,8 +56,12 @@ componentDidMount(){
 const AppNavigator = StackNavigator({
   LoginScreen : { screen : Login},
   SongScreen : { screen : Songs},
-  CreateScreen : { screen : NewAccount}
-})
+  CreateScreen : { screen : NewAccount},}, {
+    navigationOptions: {
+      header: null
+    }
+  }
+);
 
 const styles = StyleSheet.create({
   container: {
