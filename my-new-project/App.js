@@ -28,29 +28,45 @@ export default class App extends Component {
 
   constructor(){
     super();
+      let data1;
     this.state ={
       songs: [],
       currentSong: []
     }
 }
-getSongs(){
 
- fetch('https://api.myjson.com/bins/1he36z')
-    .then((response) => response.json())
-    .then((response) => this.setState({songs:response}))
+getSongs(){
+   firebase.database().ref().on('value', snapshot=>{
+     this.setState({songs: snapshot.val()});
+  })
+  firebase.database().ref().on('child_changed',  snapshot=> {
+    const items = this.state.songs;
+    items[snapshot.key] = snapshot.val();
+
+    this.setState({songs: []});
+    console.log(this.state.songs);
+
+    // re-render
+    this.forceUpdate();
+
+  });
+
 }
+
+
 
 componentDidMount(){
   this.getSongs();
-
 }
-  break;
+
+
+
   render() {
-    return (
-      <AppNavigator screenProps={this.state.songs}/>
+    return(
+   <AppNavigator screenProps={this.state.songs}/>
+ );
 
 
-    );
   }
 }
 const AppNavigator = StackNavigator({

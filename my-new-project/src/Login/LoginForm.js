@@ -10,7 +10,6 @@ import {
   Button
 } from 'react-native';
 import * as firebase from 'firebase';
-//import firebase from 'react-native-firebase';
 
 export default class LoginForm extends Component {
   state = { email: '', password: '', error: false, loading: false };
@@ -71,7 +70,7 @@ Spinner(){
         <TouchableOpacity style={styles.button} onPress={()=> this.onLoginPress()}>
         <Text style={styles.buttonText}> LOGIN </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={()=> console.log("hey")}>
+        <TouchableOpacity style={styles.button} onPress={()=> this.props.navigation.navigate('CreateScreen')}>
         <Text style={styles.buttonText}> CREATE ACCOUNT</Text>
         </TouchableOpacity>
         </View>

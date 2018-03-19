@@ -9,10 +9,28 @@ import {
   DatePickerIOS
 } from 'react-native';
 import { CheckBox } from 'react-native-elements'
-
+import * as firebase from 'firebase';
 
 export default class AccountForm extends Component {
+state = { email: '', password: '', error: false, loading: false };
 
+ signup(email, password) {
+
+    try {
+          const { email, password } = this.state;
+       firebase.auth()
+            .createUserWithEmailAndPassword(email, password).then(() => {
+          this.props.navigation.navigate('LoginScreen')});
+
+        console.log("Account created");
+
+        // Navigate to the Home page, the user is auto logged in
+
+    } catch (error) {
+        console.log(error.toString())
+    }
+
+}
   render() {
     return (
       <View style={styles.container}>
@@ -34,6 +52,7 @@ export default class AccountForm extends Component {
       returnKeyType = "next"
       autoCapitalize = "none"
       autoCorrect = {false}
+       onChangeText={email => this.setState({ email })}
       onSubmitEditing = {() => this.passwordInput.focus()}
        style={styles.input}
        />
@@ -41,6 +60,7 @@ export default class AccountForm extends Component {
        placeholder = "password"
        returnKeyType = "done"
        secureTextEntry
+       onChangeText={password => this.setState({ password })}
        ref = {(input) => this.passwordInput = input}
         style={styles.input}
         />
@@ -66,7 +86,7 @@ export default class AccountForm extends Component {
         <TouchableOpacity style={styles.button} onPress={()=> this.props.navigation.navigate('CreateScreen')}>
         <Text style={styles.buttonText}> Already a member ? </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={()=> this.signup()}>
         <Text style={styles.buttonText}> CREATE ACCOUNT</Text>
         </TouchableOpacity>
         </View>

@@ -5,6 +5,7 @@ import {
   Text,
   View
 } from 'react-native';
+import * as firebase from 'firebase';
 
 
 export default class SongItems extends Component {
@@ -24,8 +25,13 @@ export default class SongItems extends Component {
      });
      this.props.song.upvote= this.state.upvote;
 
+     firebase.database().ref().child(this.props.song.key).update({
+       upvote: this.props.song.upvote+1
+     });
+
+
   }
-  
+
   render() {
     //console.log(this.props);
 
